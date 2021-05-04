@@ -1,0 +1,10 @@
+#For client
+
+client/node_modules
+
+#For comments
+comments/node_modules
+
+#For posts
+posts/node_modules
+
