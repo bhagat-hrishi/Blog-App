@@ -8,3 +8,8 @@ comments/node_modules
 #For posts
 posts/node_modules
 
+#For event-bus
+event-bus/node_modules
+
+#For query
+query/node_modules
