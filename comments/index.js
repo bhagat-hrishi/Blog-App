@@ -2,6 +2,8 @@ const epxress = require('express');
 const bodyParser = require('body-parser');
 const {randomBytes} = require('crypto');
 const cors = require('cors');
+const axios = require('axios');
+
 
 const app = epxress();
 app.use(bodyParser.json())
@@ -16,7 +18,7 @@ app.get('/posts/:id/comments',(req,res)=>{
     res.send(commentsByPostId[req.params.id] || []);
 })
 
-app.post('/posts/:id/comments',(req,res)=>{
+app.post('/posts/:id/comments', async(req,res)=>{
 
     const commentId = randomBytes(4).toString('hex');
 
@@ -33,13 +35,31 @@ app.post('/posts/:id/comments',(req,res)=>{
 
     commentsByPostId[req.params.id]=comments;
 
+    // Now new comment created now emmit event
+  await  axios.post('http://localhost:4005/events',{
+        type:"CommentCreated",
+        data:{
+            id:commentId,
+            content,
+            postId:req.params.id
+        }
+    })
+
+
+
     // console.log(commentsByPostId)
     res.status(201).send(comments);
 
 })
 
-const PORT = 4001;
+// To listen event from event-bus
+app.post('/events',(req,res)=>{
+    console.log(`Received : ${req.body.type}`)
 
+    res.send({});
+})
+
+const PORT = 4001;
 app.listen(PORT,()=>{
-    console.log(`Server Started on PORT ${PORT}`)
+    console.log(`Comments service started on PORT ${PORT}`)
 })
