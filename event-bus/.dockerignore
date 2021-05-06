@@ -1,0 +1,2 @@
+#exlude node modules while image buildig process
+node_modules
