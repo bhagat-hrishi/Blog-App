@@ -39,7 +39,7 @@ app.get('/posts',(req,res)=>{
 
 // To listen event from event-bus
 app.post('/events',(req,res)=>{
-    console.log(`Received : ${req.body.type}`)
+    // console.log(`Received : ${req.body.type}`)
 
     res.send({});
 })
