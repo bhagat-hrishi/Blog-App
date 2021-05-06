@@ -1,5 +1,4 @@
 #For client
-
 client/node_modules
 
 #For comments
@@ -13,3 +12,9 @@ event-bus/node_modules
 
 #For query
 query/node_modules
+
+#For moderation
+moderation/node_modules
+
+#For my personal notes
+private
